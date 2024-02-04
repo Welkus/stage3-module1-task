@@ -14,10 +14,28 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CrudServiceTest {
+
+    @Test
+    public void createTest(){
+        RepositoryAccess ra = new RepositoryAccess();
+        NewsCrud newsCrud = new NewsCrudImpl(ra);
+        CrudService crudService = new CrudService(newsCrud, NewsMapper.INSTANCE);
+
+        NewsDTO newsDTO = new NewDTOBuilder()
+                .setTitle("Test title")
+                .setContent("Lorem content for testing")
+                .setAuthorId(20)
+                .build();
+
+        NewsDTO creted = crudService.createNews(newsDTO);
+        assertEquals(21, ra.getNewsList().size());
+        assertEquals(20,creted.getAuthorId());
+
+
+    }
 
     @Test
     public void testFindNewsById(){
@@ -60,7 +78,11 @@ public class CrudServiceTest {
         RepositoryAccess ra = new RepositoryAccess();
         NewsCrud newsCrud = new NewsCrudImpl(ra);
         CrudService crudService = new CrudService(newsCrud, NewsMapper.INSTANCE);
-        NewsDTO newsDTO =  new NewDTOBuilder().setId(1).setContent("this text").setTitle("Title").setAuthorId(5).build();
+        NewsDTO newsDTO =  new NewDTOBuilder()
+                .setId(1)
+                .setContent("this text")
+                .setTitle("Title").setAuthorId(5)
+                .build();
 
         NewsDTO testingDTO = new NewDTOBuilder().setId(1)
                 .setContent("this text")
@@ -75,6 +97,19 @@ public class CrudServiceTest {
         assertEquals(testingDTO.getTitle(),returned.getTitle());
         assertEquals(testingDTO.getAuthorId(),returned.getAuthorId());
         assertEquals(testingDTO.getCreateDate(),returned.getCreateDate());
+    }
+
+    @Test
+    public void deleteTest(){
+        RepositoryAccess ra = new RepositoryAccess();
+        NewsCrud newsCrud = new NewsCrudImpl(ra);
+        CrudService crudService = new CrudService(newsCrud, NewsMapper.INSTANCE);
+
+        NewsDTO newsDTO = new NewDTOBuilder().setId(2L).build();
+
+        boolean deleted = crudService.deleteNews(newsDTO);
+
+        assertTrue(deleted);
     }
 
 }

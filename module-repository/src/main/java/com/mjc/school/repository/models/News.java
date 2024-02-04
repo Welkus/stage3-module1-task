@@ -7,6 +7,8 @@ import lombok.Data;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 @Data
 @AllArgsConstructor
 public class News {
@@ -22,8 +24,8 @@ public class News {
         this.title = title;
         this.content = content;
         this.authorId = authorId;
-        createDate = LocalDateTime.from(Instant.now());
-        lastUpdateDate = LocalDateTime.from(Instant.now());
+        createDate = LocalDateTime.ofInstant(Instant.now(), ZoneId.systemDefault());
+        lastUpdateDate = LocalDateTime.ofInstant(Instant.now(), ZoneId.systemDefault());
     }
 
 

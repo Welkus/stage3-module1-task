@@ -45,6 +45,10 @@ public class NewsCrudImpl implements NewsCrud {
 
     @Override
     public boolean deleteNews(long newsId) {
-        return repositoryAccess.getNewsList().removeIf(n ->n.getId() == newsId);
+
+        News news = repositoryAccess.getNewsList().stream().filter(n -> n.getId() == newsId).findFirst().orElse(null);
+
+        return repositoryAccess.getNewsList().remove(news);
+
     }
 }

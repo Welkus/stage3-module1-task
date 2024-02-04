@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="CrudServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-02-04T21:23:31" hostname="DESKTOP-NALHAI1" time="0.118">
+<testsuite name="CrudServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-02-04T22:06:02" hostname="DESKTOP-NALHAI1" time="0.097">
   <properties/>
-  <testcase name="updateTest()" classname="CrudServiceTest" time="0.118"/>
+  <testcase name="createTest()" classname="CrudServiceTest" time="0.097"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
